@@ -1,0 +1,15 @@
+package project.neki.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SkillInfoDTO {
+	private Long id;
+	private String name;
+	private Long level;
+    private String urlImagem;
+}
