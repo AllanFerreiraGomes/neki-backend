@@ -34,7 +34,7 @@ public class JwtUtils {
 		Key sKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
 		
 		return Jwts.builder()
-					.setSubject((userPrincipal.getUsername()))
+					.setSubject((userPrincipal.getLogin()))
 					.setIssuedAt(new Date())
 					.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 					.signWith(sKey)

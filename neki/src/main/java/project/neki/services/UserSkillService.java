@@ -111,7 +111,6 @@ public class UserSkillService {
 				.orElseThrow(() -> new NoSuchElementException("Skill with ID " + skillId + " not found"));
 	}
 
-	@Transactional(readOnly = true)
 	public List<SkillInfoDTO> listarSkillsUser(Long userId) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new NoSuchElementException("Id: [" + userId + "] do user não válido"));

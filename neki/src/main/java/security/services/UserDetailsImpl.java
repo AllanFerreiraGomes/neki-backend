@@ -18,17 +18,17 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Long id;
 
-	private String username;
+	private String login;
 
 	@JsonIgnore
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String password,
+	public UserDetailsImpl(Long id, String login, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
-		this.username = username;
+		this.login = login;
 		this.password = password;
 		this.authorities = authorities;
 	}
@@ -37,7 +37,7 @@ public class UserDetailsImpl implements UserDetails {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
-		return new UserDetailsImpl(user.getId(), user.getName(), user.getPassword(), authorities);
+		return new UserDetailsImpl(user.getId(), user.getLogin(), user.getPassword(), authorities);
 	}
 
 	@Override
@@ -58,9 +58,6 @@ public class UserDetailsImpl implements UserDetails {
 		return serialVersionUID;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -75,9 +72,13 @@ public class UserDetailsImpl implements UserDetails {
 		return password;
 	}
 
-	@Override
-	public String getUsername() {
-		return username;
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	@Override
@@ -108,5 +109,10 @@ public class UserDetailsImpl implements UserDetails {
 			return false;
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
+	}
+
+	@Override
+	public String getUsername() {
+		return login;
 	}
 }
